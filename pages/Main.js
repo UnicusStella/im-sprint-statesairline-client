@@ -25,20 +25,12 @@ export default function Main() {
     }
   };
 
-  const filterByCondition = (flight) => {
-    let pass = true;
-    if (condition.departure) {
-      pass = pass && flight.departure === condition.departure;
-    }
-    if (condition.destination) {
-      pass = pass && flight.destination === condition.destination;
-    }
-    return pass;
-  };
   useEffect(() => {
-    getFlight(condition);
+    getFlight(condition).then((temp) => setFlightList(temp));
+
     console.log(getFlight(condition));
-  });
+    console.log([condition]);
+  }, [condition]);
 
   global.search = search; // 실행에는 전혀 지장이 없지만, 테스트를 위해 필요한 코드입니다. 이 코드는 지우지 마세요!
 
@@ -60,10 +52,11 @@ export default function Main() {
             <div className="col">도착 시각</div>
             <div className="col"></div>
           </div>
-          <FlightList list={flightList.filter(filterByCondition)} />
+          <FlightList list={flightList} />
         </div>
 
         <div className="debug-area">
+          <LoadingIndicator />
           <Debug condition={condition} />
         </div>
       </main>
