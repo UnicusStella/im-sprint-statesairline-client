@@ -16,7 +16,7 @@ function Search({ onSearch }) {
   const handleSearchClick = () => {
     console.log('검색 버튼을 누르거나, 엔터를 치면 search 함수가 실행됩니다');
     // TODO:
-    onSearch();
+    onSearch({ departure: 'ICN', destination: textDestination });
   };
 
   return (

@@ -35,6 +35,11 @@ export default function Main() {
     }
     return pass;
   };
+  // useEffect(() => {
+  //   console.log(getFlight());
+  //   console.log(condition);
+  //   console.log(flightList);
+  // });
 
   global.search = search; // 실행에는 전혀 지장이 없지만, 테스트를 위해 필요한 코드입니다. 이 코드는 지우지 마세요!
 
