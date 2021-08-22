@@ -18,7 +18,7 @@ function Search({ onSearch }) {
 
     // TODO:
     const departure = 'ICN';
-    const destination = textDestination === '' ? null : { textDestination };
+    const destination = textDestination === '' ? null : textDestination;
     onSearch({ departure, destination });
   };
 
