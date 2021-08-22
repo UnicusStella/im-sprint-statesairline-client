@@ -13,6 +13,7 @@ export default function Main() {
     departure: 'ICN',
   });
   const [flightList, setFlightList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const search = ({ departure, destination }) => {
     if (
@@ -27,21 +28,12 @@ export default function Main() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     getFlight(condition).then((item) => {
       setFlightList(item);
+      setIsLoading(false);
     });
   }, [condition]);
-
-  /* const filterByCondition = (flight) => {
-    let pass = true;
-    if (condition.departure) {
-      pass = pass && flight.departure === condition.departure;
-    }
-    if (condition.destination) {
-      pass = pass && flight.destination === condition.destination;
-    }
-    return pass;
-  }; */
 
   global.search = search; // 실행에는 전혀 지장이 없지만, 테스트를 위해 필요한 코드입니다. 이 코드는 지우지 마세요!
 
@@ -63,7 +55,7 @@ export default function Main() {
             <div className="col">도착 시각</div>
             <div className="col"></div>
           </div>
-          <FlightList list={flightList} />
+          {isLoading ? <LoadingIndicator /> : <FlightList list={flightList} />}
         </div>
 
         <div className="debug-area">
