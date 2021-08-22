@@ -12,7 +12,7 @@ export default function Main() {
   const [condition, setCondition] = useState({
     departure: 'ICN',
   });
-  const [flightList, setFlightList] = useState(json);
+  const [flightList, setFlightList] = useState([]);
 
   const search = ({ departure, destination }) => {
     if (
@@ -25,6 +25,12 @@ export default function Main() {
       setCondition({ departure, destination });
     }
   };
+
+  useEffect(() => {
+    getFlight(condition).then((item) => {
+      setFlightList(item);
+    });
+  }, [condition]);
 
   const filterByCondition = (flight) => {
     let pass = true;
